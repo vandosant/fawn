@@ -5,13 +5,18 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import FuelSavingsApp from '../components/FuelSavingsApp';
 import * as FuelSavingsActions from '../actions/fuelSavingsActions';
+import CmsApp from '../components/CmsApp';
 
 class App extends React.Component {
   render() {
     const { fuelSavingsAppState, actions } = this.props;
 
     return (
-        <FuelSavingsApp fuelSavingsAppState={fuelSavingsAppState} actions={actions} />
+      <div>
+        <FuelSavingsApp fuelSavingsAppState={fuelSavingsAppState} actions={actions}>
+        </FuelSavingsApp>
+        <CmsApp></CmsApp>
+      </div>
     );
   }
 }
