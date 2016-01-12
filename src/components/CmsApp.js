@@ -1,14 +1,11 @@
 import React from 'react';
 
 class CmsApp extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
+    let x = 1;
     return (
-      <div>Hello from CMS</div>
-    )
+      <div>Hello from CMS {x}</div>
+    );
   }
 }
 
