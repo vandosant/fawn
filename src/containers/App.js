@@ -34,9 +34,8 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  let actionCreators = Object.assign({}, FuelSavingsActions, cmsActions);
   return {
-    actions: bindActionCreators(actionCreators, dispatch)
+    actions: bindActionCreators({...FuelSavingsActions, ...cmsActions}, dispatch)
   };
 }
 
