@@ -1,5 +1,5 @@
 import { ADD_ENTITY } from '../constants/ActionTypes';
 
-export function addEntity(setting) {
+export function addEntity(settings) {
   return {type: ADD_ENTITY, settings};
 }

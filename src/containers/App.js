@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import FuelSavingsApp from '../components/FuelSavingsApp';
 import * as FuelSavingsActions from '../actions/fuelSavingsActions';
+import * as cmsActions from '../actions/cmsActions';
 import CmsApp from '../components/CmsApp';
 
 class App extends React.Component {
@@ -33,8 +34,9 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
+  let actionCreators = Object.assign({}, FuelSavingsActions, cmsActions);
   return {
-    actions: bindActionCreators(FuelSavingsActions, dispatch)
+    actions: bindActionCreators(actionCreators, dispatch)
   };
 }
 
