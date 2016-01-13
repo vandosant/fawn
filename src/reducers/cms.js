@@ -1,11 +1,12 @@
 function cmsAppState(state = [], action) {
   switch (action.type) {
-    case 'INCREMENT':
-      return state + 1;
-    case 'DECREMENT':
-      return state - 1;
     case 'ADD_ENTITY':
-      return [];
+      return [
+        ...state, {
+          id: action.id,
+          text: action.text
+        }
+      ];
     default:
       return state;
   }
@@ -32,7 +33,7 @@ const testAddEntity = () => {
   deepFreeze(action);
 
   expect(
-    cmsAppState(stateBefore,action)
+    cmsAppState(stateBefore, action)
   ).toEqual(stateAfter);
   console.log('Passed!');
 };
