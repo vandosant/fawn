@@ -10,13 +10,13 @@ import CmsApp from '../components/CmsApp';
 
 class App extends React.Component {
   render() {
-    const { fuelSavingsAppState, actions } = this.props;
+    const { fuelSavingsAppState, cmsAppState, actions } = this.props;
 
     return (
       <div>
         <FuelSavingsApp fuelSavingsAppState={fuelSavingsAppState} actions={actions}>
         </FuelSavingsApp>
-        <CmsApp></CmsApp>
+        <CmsApp cmsAppState={cmsAppState} actions={actions}></CmsApp>
       </div>
     );
   }
@@ -24,12 +24,14 @@ class App extends React.Component {
 
 App.propTypes = {
   actions: PropTypes.object.isRequired,
-  fuelSavingsAppState: PropTypes.object.isRequired
+  fuelSavingsAppState: PropTypes.object.isRequired,
+  cmsAppState: PropTypes.array.isRequired
 };
 
 function mapStateToProps(state) {
   return {
-    fuelSavingsAppState: state.fuelSavingsAppState
+    fuelSavingsAppState: state.fuelSavingsAppState,
+    cmsAppState: state.cmsAppState
   };
 }
 
