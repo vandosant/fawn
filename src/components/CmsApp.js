@@ -9,6 +9,9 @@ class CmsApp extends React.Component {
   save() {
     this.props.actions.addEntity(this.props.cmsAppState);
   }
+  toggle() {
+    this.props.actions.toggleEntity(this.props.cmsAppState);
+  }
 
   render() {
     let x = 1;

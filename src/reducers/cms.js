@@ -1,4 +1,4 @@
-import { ADD_ENTITY } from '../constants/ActionTypes';
+import { ADD_ENTITY, TOGGLE_ENTITY } from '../constants/ActionTypes';
 
 function entity(state, action) {
   switch (action.type) {
@@ -8,7 +8,7 @@ function entity(state, action) {
         text: action.text,
         published: false
       };
-    case 'TOGGLE_ENTITY':
+    case TOGGLE_ENTITY:
       if (state.id !== action.id) {
         return state;
       }
@@ -25,7 +25,7 @@ function cmsAppState(state = [], action) {
       return [
         ...state, entity(undefined, action)
       ];
-    case 'TOGGLE_ENTITY':
+    case TOGGLE_ENTITY:
       return state.map(e => entity(e, action));
     default:
       return state;
@@ -74,7 +74,7 @@ const testToggleEntity = () => {
     }
   ];
   const action = {
-    type: 'TOGGLE_ENTITY',
+    type: TOGGLE_ENTITY,
     id: 1
   };
   const stateAfter = [
