@@ -10,10 +10,21 @@ function cmsAppState(state = [], action) {
           published: action.published
         }
       ];
+    case 'TOGGLE_ENTITY':
+      return state.map(entity => {
+        if (entity.id !== action.id) {
+          return entity;
+        }
+        return {
+          ...entity,
+          published: !entity.published
+        };
+      });
     default:
       return state;
   }
 }
+export default cmsAppState;
 
 import expect from 'expect';
 import deepFreeze from 'deep-freeze';
@@ -40,8 +51,46 @@ const testAddEntity = () => {
   expect(
     cmsAppState(stateBefore, action)
   ).toEqual(stateAfter);
-  console.log('Passed!');
+};
+
+const testToggleEntity = () => {
+  const stateBefore = [
+    {
+      id: 0,
+      text: 'Some entity',
+      published: false
+    },
+    {
+      id: 1,
+      text: 'Another entity',
+      published: false
+    }
+  ];
+  const action = {
+    type: 'TOGGLE_ENTITY',
+    id: 1
+  };
+  const stateAfter = [
+    {
+      id: 0,
+      text: 'Some entity',
+      published: false
+    },
+    {
+      id: 1,
+      text: 'Another entity',
+      published: true
+    }
+  ];
+
+  deepFreeze(stateBefore);
+  deepFreeze(action);
+
+  expect(
+    cmsAppState(stateBefore, action)
+  ).toEqual(stateAfter);
 };
 
 testAddEntity();
-export default cmsAppState;
+testToggleEntity();
+console.log('Passed!');
