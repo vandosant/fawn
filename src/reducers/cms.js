@@ -1,25 +1,32 @@
 import { ADD_ENTITY } from '../constants/ActionTypes';
 
+function entity(state, action) {
+  switch (action.type) {
+    case ADD_ENTITY:
+      return {
+        id: action.id,
+        text: action.text,
+        published: false
+      };
+    case 'TOGGLE_ENTITY':
+      if (state.id !== action.id) {
+        return state;
+      }
+      return {
+        ...state,
+        published: !state.published
+      };
+  }
+}
+
 function cmsAppState(state = [], action) {
   switch (action.type) {
     case ADD_ENTITY:
       return [
-        ...state, {
-          id: action.id,
-          text: action.text,
-          published: action.published
-        }
+        ...state, entity(undefined, action)
       ];
     case 'TOGGLE_ENTITY':
-      return state.map(entity => {
-        if (entity.id !== action.id) {
-          return entity;
-        }
-        return {
-          ...entity,
-          published: !entity.published
-        };
-      });
+      return state.map(e => entity(e, action));
     default:
       return state;
   }
