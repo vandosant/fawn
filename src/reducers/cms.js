@@ -6,7 +6,8 @@ function cmsAppState(state = [], action) {
       return [
         ...state, {
           id: action.id,
-          text: action.text
+          text: action.text,
+          published: action.published
         }
       ];
     default:
@@ -22,12 +23,14 @@ const testAddEntity = () => {
   const action = {
     type: ADD_ENTITY,
     id: 0,
-    text: 'Cms String'
+    text: 'Cms String',
+    published: false
   };
   const stateAfter = [
     {
       id: 0,
-      text: 'Cms String'
+      text: 'Cms String',
+      published: false
     }
   ];
 
