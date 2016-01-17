@@ -1,5 +1,4 @@
 import React, {PropTypes} from 'react';
-import { findDOMNode } from 'react-dom';
 
 let nextEntityId = 0;
 class CmsApp extends React.Component {
@@ -13,9 +12,9 @@ class CmsApp extends React.Component {
   }
 
   save() {
-    this.props.actions.addEntity(this.props.cmsAppState, this.settings.text, nextEntityId++);
+    this.props.actions.addEntity(this.props.cmsAppState, this.input.value, nextEntityId++);
     this.settings = {};
-    findDOMNode(this.refs.text).value = "";
+    this.input.value = "";
   }
 
   toggle() {
@@ -27,7 +26,7 @@ class CmsApp extends React.Component {
   }
 
   validate(e) {
-    this.settings.text = e.target.value;
+    this.settings.text = this.input.value;
     return true;
   }
 
@@ -37,9 +36,10 @@ class CmsApp extends React.Component {
         <ul>
           {this.props.cmsAppState.map(this.mapEntity)}
         </ul>
-        <div><input ref="text" type="text" value={this.settings.text} onChange={this.validate}/><input type="submit"
-                                                                                                       value="Save"
-                                                                                                       onClick={this.save}/>
+        <div><input ref={node => {this.input = node;}} type="text" value={this.settings.text}
+                    onChange={this.validate}/><input type="submit"
+                                                     value="Save"
+                                                     onClick={this.save}/>
         </div>
       </div>
     );
