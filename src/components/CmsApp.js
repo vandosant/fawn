@@ -33,14 +33,13 @@ class CmsApp extends React.Component {
   render() {
     return (
       <div>
+        <input ref={node => {this.input = node;}} type="text" value={this.settings.text}
+               onChange={this.validate}/><input type="submit"
+                                                value="Save"
+                                                onClick={this.save}/>
         <ul>
           {this.props.cmsAppState.map(this.mapEntity)}
         </ul>
-        <div><input ref={node => {this.input = node;}} type="text" value={this.settings.text}
-                    onChange={this.validate}/><input type="submit"
-                                                     value="Save"
-                                                     onClick={this.save}/>
-        </div>
       </div>
     );
   }
