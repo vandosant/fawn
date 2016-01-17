@@ -7,21 +7,25 @@ class CmsApp extends React.Component {
     this.save = this.save.bind(this);
     this.mapEntity = this.mapEntity.bind(this);
   }
+
   save() {
     this.props.actions.addEntity(this.props.cmsAppState);
   }
+
   toggle() {
     this.props.actions.toggleEntity(this.props.cmsAppState);
   }
+
   mapEntity(entity, index) {
-    return (<div key={index}><input type="text" value={entity.text} readOnly/><input type="submit" value="Save" onClick={this.save} /></div>);
+    return (<div key={index}><input type="text" value={entity.text} readOnly/><input type="submit" value="Save"
+                                                                                     onClick={this.save}/></div>);
   }
 
   render() {
     return (
       <div>
         {this.props.cmsAppState.map(this.mapEntity)}
-        <div><input type="text" /><input type="submit" value="Save" onClick={this.save} /></div>
+        <div><input type="text"/><input type="submit" value="Save" onClick={this.save}/></div>
       </div>
     );
   }
