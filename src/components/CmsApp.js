@@ -12,7 +12,7 @@ class CmsApp extends React.Component {
     this.settings = {};
   }
 
-  save(e) {
+  save() {
     this.props.actions.addEntity(this.props.cmsAppState, this.settings.text, nextEntityId++);
     this.settings = {};
     findDOMNode(this.refs.text).value = "";
@@ -22,8 +22,8 @@ class CmsApp extends React.Component {
     this.props.actions.toggleEntity(this.props.cmsAppState);
   }
 
-  mapEntity(entity, index) {
-    return (<div key={index}><input type="text" value={entity.text} readOnly/><br /></div>);
+  mapEntity(entity) {
+    return (<li key={entity.id}>{entity.text}</li>);
   }
 
   validate(e) {
@@ -34,7 +34,9 @@ class CmsApp extends React.Component {
   render() {
     return (
       <div>
-        {this.props.cmsAppState.map(this.mapEntity)}
+        <ul>
+          {this.props.cmsAppState.map(this.mapEntity)}
+        </ul>
         <div><input ref="text" type="text" value={this.settings.text} onChange={this.validate}/><input type="submit"
                                                                                                        value="Save"
                                                                                                        onClick={this.save}/>
