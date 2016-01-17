@@ -3,8 +3,8 @@ import fuelSavingsAppState from './fuelSavings';
 import cmsAppState from './cms.js';
 
 const rootReducer = combineReducers({
-  fuelSavingsAppState,
-  cmsAppState
+  fuelSavingsAppState: fuelSavingsAppState,
+  cmsAppState: cmsAppState
 });
 
 export default rootReducer;
