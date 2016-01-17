@@ -6,10 +6,11 @@ class CmsApp extends React.Component {
     this.props.actions.addEntity = this.props.actions.addEntity.bind(this);
     this.save = this.save.bind(this);
     this.mapEntity = this.mapEntity.bind(this);
+    this.settings = {text: 'test'};
   }
 
   save() {
-    this.props.actions.addEntity(this.props.cmsAppState);
+    this.props.actions.addEntity(this.props.cmsAppState, this.settings.text);
   }
 
   toggle() {
@@ -25,7 +26,8 @@ class CmsApp extends React.Component {
     return (
       <div>
         {this.props.cmsAppState.map(this.mapEntity)}
-        <div><input type="text"/><input type="submit" value="Save" onClick={this.save}/></div>
+        <div><input type="text" value={this.settings.text}/><input type="submit" value="Save" onClick={this.save}/>
+        </div>
       </div>
     );
   }
