@@ -19,7 +19,13 @@ function entity(state, action) {
   }
 }
 
-function cmsAppState(state = [], action) {
+const initialEntity = {
+  text: 'Cms String',
+  published: false
+};
+
+
+function cmsAppState(state = [initialEntity], action) {
   switch (action.type) {
     case ADD_ENTITY:
       return [

@@ -3,8 +3,9 @@ import React, {PropTypes} from 'react';
 class CmsApp extends React.Component {
   constructor(props) {
     super(props);
-
+    this.props.actions.addEntity = this.props.actions.addEntity.bind(this);
     this.save = this.save.bind(this);
+    this.mapEntity = this.mapEntity.bind(this);
   }
   save() {
     this.props.actions.addEntity(this.props.cmsAppState);
@@ -12,13 +13,14 @@ class CmsApp extends React.Component {
   toggle() {
     this.props.actions.toggleEntity(this.props.cmsAppState);
   }
+  mapEntity(entity, index) {
+    return <form key={index}><input type="text" value={entity.text} onChange={this.save} /></form>;
+  }
 
   render() {
-    let x = 1;
     return (
       <div>
-        <div>Hello from CMS {x}</div>
-        <input type="submit" value="Save" onClick={this.save}/>
+        {this.props.cmsAppState.map(this.mapEntity)}
       </div>
     );
   }
