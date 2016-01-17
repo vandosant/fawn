@@ -17,15 +17,13 @@ class CmsApp extends React.Component {
     this.input.value = "";
   }
 
-  toggle() {
-    this.props.actions.toggleEntity(this.props.cmsAppState);
-  }
-
   mapEntity(entity) {
-    return (<li key={entity.id}>{entity.text}</li>);
+    return (<li key={entity.id}
+                onClick={() => this.props.actions.toggleEntity(this.props.cmsAppState, entity.id)}
+                style={{fontStyle: entity.published ? 'normal' : 'italic'}}>{entity.text}</li>);
   }
 
-  validate(e) {
+  validate() {
     this.settings.text = this.input.value;
     return true;
   }
