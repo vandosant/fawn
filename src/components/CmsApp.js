@@ -1,16 +1,21 @@
 import React, {PropTypes} from 'react';
+import { findDOMNode } from 'react-dom';
 
+let nextEntityId = 0;
 class CmsApp extends React.Component {
   constructor(props) {
     super(props);
     this.props.actions.addEntity = this.props.actions.addEntity.bind(this);
     this.save = this.save.bind(this);
     this.mapEntity = this.mapEntity.bind(this);
-    this.settings = {text: 'test'};
+    this.validate = this.validate.bind(this);
+    this.settings = {};
   }
 
-  save() {
-    this.props.actions.addEntity(this.props.cmsAppState, this.settings.text);
+  save(e) {
+    this.props.actions.addEntity(this.props.cmsAppState, this.settings.text, nextEntityId++);
+    this.settings = {};
+    findDOMNode(this.refs.text).value = "";
   }
 
   toggle() {
@@ -18,15 +23,21 @@ class CmsApp extends React.Component {
   }
 
   mapEntity(entity, index) {
-    return (<div key={index}><input type="text" value={entity.text} readOnly/><input type="submit" value="Save"
-                                                                                     onClick={this.save}/></div>);
+    return (<div key={index}><input type="text" value={entity.text} readOnly/><br /></div>);
+  }
+
+  validate(e) {
+    this.settings.text = e.target.value;
+    return true;
   }
 
   render() {
     return (
       <div>
         {this.props.cmsAppState.map(this.mapEntity)}
-        <div><input type="text" value={this.settings.text}/><input type="submit" value="Save" onClick={this.save}/>
+        <div><input ref="text" type="text" value={this.settings.text} onChange={this.validate}/><input type="submit"
+                                                                                                       value="Save"
+                                                                                                       onClick={this.save}/>
         </div>
       </div>
     );
