@@ -1,4 +1,4 @@
-import { ADD_ENTITY, TOGGLE_ENTITY } from '../constants/ActionTypes';
+import { ADD_ENTITY, TOGGLE_ENTITY, SET_VISIBILITY_FILTER } from '../constants/ActionTypes';
 
 function entity(state, action) {
   switch (action.type) {
@@ -19,7 +19,7 @@ function entity(state, action) {
   }
 }
 
-function cmsAppState(state = [], action) {
+export function cmsAppState(state = [], action) {
   switch (action.type) {
     case ADD_ENTITY:
       return [
@@ -32,16 +32,14 @@ function cmsAppState(state = [], action) {
   }
 }
 
-const visibilityFilter = (state = 'SHOW_ALL', action) => {
+export const visibilityFilter = (state = 'SHOW_ALL', action) => {
   switch(action.type) {
-    case 'SHOW_ALL':
+    case SET_VISIBILITY_FILTER:
       return action.filter;
     default:
       return state;
   }
 };
-
-export default cmsAppState;
 
 import expect from 'expect';
 import deepFreeze from 'deep-freeze';

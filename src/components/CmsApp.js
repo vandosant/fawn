@@ -1,7 +1,7 @@
 import React, {PropTypes} from 'react';
 import FilterLink from './FilterLink';
 
-const getPublishedEntities = (entities, filter) => {
+const getPublishedEntities = (entities = [], filter) => {
   switch (filter) {
     case 'SHOW_ALL':
       return entities;
@@ -45,7 +45,7 @@ class CmsApp extends React.Component {
   }
 
   render() {
-    const publishedEntities = getPublishedEntities(this.props.cmsAppState, 'SHOW_ALL');
+    const visibleEntities = getPublishedEntities(this.props.cmsAppState, this.props.visibilityFilter);
     return (
       <div>
         <input ref={node => {this.input = node;}} type="text" value={this.settings.text}
@@ -53,7 +53,7 @@ class CmsApp extends React.Component {
                                                 value="Save"
                                                 onClick={this.save}/>
         <ul>
-          {publishedEntities.map(this.mapEntity)}
+          {visibleEntities.map(this.mapEntity)}
         </ul>
         <p>
           Show:

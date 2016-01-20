@@ -1,10 +1,11 @@
 import { combineReducers } from 'redux';
 import fuelSavingsAppState from './fuelSavings';
-import cmsAppState from './cms.js';
+import {cmsAppState, visibilityFilter} from './cms.js';
 
 const rootReducer = combineReducers({
   fuelSavingsAppState,
-  cmsAppState
+  cmsAppState,
+  visibilityFilter
 });
 
 export default rootReducer;
