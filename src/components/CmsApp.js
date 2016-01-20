@@ -1,4 +1,20 @@
 import React, {PropTypes} from 'react';
+import FilterLink from './FilterLink';
+
+const getPublishedEntities = (entities, filter) => {
+  switch (filter) {
+    case 'SHOW_ALL':
+      return entities;
+    case 'SHOW_PUBLISHED':
+      return entities.filter(
+          e => e.published
+      );
+    case 'SHOW_UNPUBLISHED':
+      return entities.filter(
+          e => !e.published
+      );
+  }
+};
 
 let nextEntityId = 0;
 class CmsApp extends React.Component {
@@ -29,6 +45,7 @@ class CmsApp extends React.Component {
   }
 
   render() {
+    const publishedEntities = getPublishedEntities(this.props.cmsAppState, 'SHOW_ALL');
     return (
       <div>
         <input ref={node => {this.input = node;}} type="text" value={this.settings.text}
@@ -36,8 +53,17 @@ class CmsApp extends React.Component {
                                                 value="Save"
                                                 onClick={this.save}/>
         <ul>
-          {this.props.cmsAppState.map(this.mapEntity)}
+          {publishedEntities.map(this.mapEntity)}
         </ul>
+        <p>
+          Show:
+          {' '}
+          <FilterLink filter="SHOW_ALL" actions={this.props.actions}>All</FilterLink>
+          {' '}
+          <FilterLink filter="SHOW_PUBLISHED" actions={this.props.actions}>Published</FilterLink>
+          {' '}
+          <FilterLink filter="SHOW_UNPUBLISHED" actions={this.props.actions}>Unpublished</FilterLink>
+        </p>
       </div>
     );
   }

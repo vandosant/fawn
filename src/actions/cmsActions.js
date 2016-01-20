@@ -7,3 +7,7 @@ export function addEntity(settings, text, id) {
 export function toggleEntity(settings, id) {
   return {type: TOGGLE_ENTITY, settings, id};
 }
+
+export function setVisibilityFilter(settings, filter) {
+  return {type: 'SET_VISIBILITY_FILTER', settings, filter};
+}
