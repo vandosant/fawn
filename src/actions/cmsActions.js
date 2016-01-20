@@ -1,4 +1,4 @@
-import { ADD_ENTITY, TOGGLE_ENTITY} from '../constants/ActionTypes';
+import { ADD_ENTITY, TOGGLE_ENTITY, SET_VISIBILITY_FILTER} from '../constants/ActionTypes';
 
 export function addEntity(settings, text, id) {
   return {type: ADD_ENTITY, settings, text, id};
@@ -9,5 +9,5 @@ export function toggleEntity(settings, id) {
 }
 
 export function setVisibilityFilter(settings, filter) {
-  return {type: 'SET_VISIBILITY_FILTER', settings, filter};
+  return {type: SET_VISIBILITY_FILTER, settings, filter};
 }
