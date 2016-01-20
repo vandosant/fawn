@@ -31,6 +31,16 @@ function cmsAppState(state = [], action) {
       return state;
   }
 }
+
+const visibilityFilter = (state = 'SHOW_ALL', action) => {
+  switch(action.type) {
+    case 'SHOW_ALL':
+      return action.filter;
+    default:
+      return state;
+  }
+};
+
 export default cmsAppState;
 
 import expect from 'expect';
