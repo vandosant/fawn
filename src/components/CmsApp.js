@@ -45,7 +45,12 @@ class CmsApp extends React.Component {
   }
 
   render() {
-    const visibleEntities = getPublishedEntities(this.props.cmsAppState, this.props.visibilityFilter);
+    const {
+      actions,
+      visibilityFilter,
+      cmsAppState
+      } = this.props;
+    const visibleEntities = getPublishedEntities(cmsAppState, visibilityFilter);
     return (
       <div>
         <input ref={node => {this.input = node;}} type="text" value={this.settings.text}
@@ -58,14 +63,14 @@ class CmsApp extends React.Component {
         <p>
           Show:
           {' '}
-          <FilterLink filter="SHOW_ALL" actions={this.props.actions}
-                      currentFilter={this.props.visibilityFilter}>All</FilterLink>
+          <FilterLink filter="SHOW_ALL" actions={actions}
+                      currentFilter={visibilityFilter}>All</FilterLink>
           {' '}
-          <FilterLink filter="SHOW_PUBLISHED" actions={this.props.actions}
-                      currentFilter={this.props.visibilityFilter}>Published</FilterLink>
+          <FilterLink filter="SHOW_PUBLISHED" actions={actions}
+                      currentFilter={visibilityFilter}>Published</FilterLink>
           {' '}
-          <FilterLink filter="SHOW_UNPUBLISHED" actions={this.props.actions}
-                      currentFilter={this.props.visibilityFilter}>Unpublished</FilterLink>
+          <FilterLink filter="SHOW_UNPUBLISHED" actions={actions}
+                      currentFilter={visibilityFilter}>Unpublished</FilterLink>
         </p>
       </div>
     );
@@ -74,7 +79,8 @@ class CmsApp extends React.Component {
 
 CmsApp.propTypes = {
   actions: PropTypes.object.isRequired,
-  cmsAppState: PropTypes.array.isRequired
+  cmsAppState: PropTypes.array.isRequired,
+  visibilityFilter: PropTypes.object.isRequired
 };
 
 export default CmsApp;
