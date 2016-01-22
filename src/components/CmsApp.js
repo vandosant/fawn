@@ -16,13 +16,32 @@ const getPublishedEntities = (entities = [], filter) => {
   }
 };
 
+const Entity = ({onClick, published, text}) =>(
+  <li
+    onClick={onClick}
+    style={{fontStyle: published ? 'normal' : 'italic'}}
+    >
+    {text}
+  </li>
+);
+
+const EntityList = ({
+  entities,
+  onEntityClick
+  }) => (
+  <ul>
+    {entities.map(entity => <Entity key={entity.id} {...entity}
+                                    onClick={() => onEntityClick(entity.id)}
+      />)}
+  </ul>
+);
+
 let nextEntityId = 0;
 class CmsApp extends React.Component {
   constructor(props) {
     super(props);
     this.props.actions.addEntity = this.props.actions.addEntity.bind(this);
     this.save = this.save.bind(this);
-    this.mapEntity = this.mapEntity.bind(this);
     this.validate = this.validate.bind(this);
     this.settings = {};
   }
@@ -31,12 +50,6 @@ class CmsApp extends React.Component {
     this.props.actions.addEntity(this.props.cmsAppState, this.input.value, nextEntityId++);
     this.settings = {};
     this.input.value = "";
-  }
-
-  mapEntity(entity) {
-    return (<li key={entity.id}
-                onClick={() => this.props.actions.toggleEntity(this.props.cmsAppState, entity.id)}
-                style={{fontStyle: entity.published ? 'normal' : 'italic'}}>{entity.text}</li>);
   }
 
   validate() {
@@ -58,7 +71,8 @@ class CmsApp extends React.Component {
                                                 value="Save"
                                                 onClick={this.save}/>
         <ul>
-          {visibleEntities.map(this.mapEntity)}
+          <EntityList entities={visibleEntities}
+                      onEntityClick={id => this.props.actions.toggleEntity(this.props.cmsAppState, id)}/>
         </ul>
         <p>
           Show:
@@ -80,7 +94,7 @@ class CmsApp extends React.Component {
 CmsApp.propTypes = {
   actions: PropTypes.object.isRequired,
   cmsAppState: PropTypes.array.isRequired,
-  visibilityFilter: PropTypes.object.isRequired
+  visibilityFilter: PropTypes.string.isRequired
 };
 
 export default CmsApp;
