@@ -1,5 +1,6 @@
 import React, {PropTypes} from 'react';
 import FilterLink from './FilterLink';
+import EntityList from './EntityList';
 
 const getPublishedEntities = (entities = [], filter) => {
   switch (filter) {
@@ -15,26 +16,6 @@ const getPublishedEntities = (entities = [], filter) => {
       );
   }
 };
-
-const Entity = ({onClick, published, text}) =>(
-  <li
-    onClick={onClick}
-    style={{fontStyle: published ? 'normal' : 'italic'}}
-    >
-    {text}
-  </li>
-);
-
-const EntityList = ({
-  entities,
-  onEntityClick
-  }) => (
-  <ul>
-    {entities.map(entity => <Entity key={entity.id} {...entity}
-                                    onClick={() => onEntityClick(entity.id)}
-      />)}
-  </ul>
-);
 
 let nextEntityId = 0;
 class CmsApp extends React.Component {
@@ -70,10 +51,9 @@ class CmsApp extends React.Component {
                onChange={this.validate}/><input type="submit"
                                                 value="Save"
                                                 onClick={this.save}/>
-        <ul>
-          <EntityList entities={visibleEntities}
-                      onEntityClick={id => this.props.actions.toggleEntity(this.props.cmsAppState, id)}/>
-        </ul>
+        <EntityList entities={visibleEntities}
+                    onEntityClick={id => this.props.actions.toggleEntity(this.props.cmsAppState, id)}/>
+
         <p>
           Show:
           {' '}
