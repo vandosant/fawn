@@ -58,11 +58,14 @@ class CmsApp extends React.Component {
         <p>
           Show:
           {' '}
-          <FilterLink filter="SHOW_ALL" actions={this.props.actions}>All</FilterLink>
+          <FilterLink filter="SHOW_ALL" actions={this.props.actions}
+                      currentFilter={this.props.visibilityFilter}>All</FilterLink>
           {' '}
-          <FilterLink filter="SHOW_PUBLISHED" actions={this.props.actions}>Published</FilterLink>
+          <FilterLink filter="SHOW_PUBLISHED" actions={this.props.actions}
+                      currentFilter={this.props.visibilityFilter}>Published</FilterLink>
           {' '}
-          <FilterLink filter="SHOW_UNPUBLISHED" actions={this.props.actions}>Unpublished</FilterLink>
+          <FilterLink filter="SHOW_UNPUBLISHED" actions={this.props.actions}
+                      currentFilter={this.props.visibilityFilter}>Unpublished</FilterLink>
         </p>
       </div>
     );
